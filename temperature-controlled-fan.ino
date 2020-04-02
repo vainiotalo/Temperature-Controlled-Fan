@@ -9,7 +9,7 @@ https://github.com/milesburton/Arduino-Temperature-Control-Library
 Tempereture Controlled ON/OFF fan using a 2-wire 12V DC fan and DS18B20 temperature sensor
 */
 
-#define ONE_WIRE_BUS 5 // Set up sensor data on digital input 5
+#define ONE_WIRE_BUS 5 // Set up sensor data on pin 5
 
 OneWire oneWire(ONE_WIRE_BUS);
 
