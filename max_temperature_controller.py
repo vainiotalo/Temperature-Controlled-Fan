@@ -45,13 +45,14 @@ import keyboard
 import serial
 import time
 
-serialPort = "COM3"
+print("\nEnter your serial port name \nExample: COM3")
+serialPort = raw_input() # Entering an invalid port will cause a crash
 baudRate = 9600
 
 start_marker = 60
 end_marker = 62
 
-print("--------------------------------------")
+print("\n--------------------------------------")
 print("--- Maximum temperature controller ---")
 print("--------------------------------------")
 print("Press + to increase value")
@@ -60,4 +61,5 @@ print("Press Esc to exit controller")
 print("--------------------------------------")
 
 ser = serial.Serial(serialPort, baudRate)
+receive_from_arduino()
 record_keystrokes()

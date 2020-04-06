@@ -19,6 +19,7 @@ int Relay = 7; // Relay pin
 float temp = 0;
 float tempMax = 25.0; // Switch on the relay
 boolean newValueChange = false;
+boolean justStarted = true;
 
 
 void setup() {
@@ -64,6 +65,12 @@ void receiveControllerCommand(){
 }
 
 void replyToController(){
+  if(justStarted) { // Send initial tempMax when starting to use controller
+    justStarted = false;
+    Serial.print("<Current value: ");
+    Serial.print(tempMax);
+    Serial.print(">");
+  }
   if(newValueChange){
     newValueChange = false;
     Serial.print("<New value: ");
