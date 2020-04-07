@@ -18,9 +18,7 @@ DallasTemperature sensors(&oneWire);
 int Relay = 7; // Relay pin
 float temp = 0;
 float tempMax = 25.0; // Switch on the relay
-boolean newValueChange = false;
-boolean justStarted = true;
-
+boolean newValueChange = true;
 
 void setup() {
   Serial.begin(9600);
@@ -35,9 +33,9 @@ void loop() {
   receiveControllerCommand(); // Check if tempMax value has been changed
   replyToController();
   
-  Serial.print("Temperature: ");
+  Serial.print("Temperature: `");
   Serial.print(temp);
-  Serial.print(" C \n");
+  Serial.print("' C \n");
   
   if(temp > tempMax) { // If temp is higher than tempMax,
     digitalWrite(Relay, LOW); // switch on the relay
@@ -65,15 +63,9 @@ void receiveControllerCommand(){
 }
 
 void replyToController(){
-  if(justStarted) { // Send initial tempMax when starting to use controller
-    justStarted = false;
-    Serial.print("<Current value: ");
-    Serial.print(tempMax);
-    Serial.print(">");
-  }
   if(newValueChange){
     newValueChange = false;
-    Serial.print("<New value: ");
+    Serial.print("<");
     Serial.print(tempMax);
     Serial.print(">");
   }
